@@ -1,13 +1,15 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { AuthContext } from '../authprovider/Authprovider';
 
 const Login = () => {
     const [authErr, setAuthErr] = useState('')
     const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
     const {
         register,
         handleSubmit,
@@ -17,7 +19,11 @@ const Login = () => {
         const email = data.email;
         const password = data.password;
         signIn(email, password)
-            .then(result => console.log(result.user))
+            .then(result => {
+                if (result.user) {
+                    setTimeout(() => navigate(location?.state ? location.state : '/'))
+                }
+            })
             .catch(err => setAuthErr(err.message))
     }
     return (
@@ -27,8 +33,9 @@ const Login = () => {
                     <title>Log in</title>
                 </Helmet>
                 <ToastContainer autoClose={1000} />
-                <section className="p-6 container mx-auto  text-gray-950">
-                    <form className=" grid grid-cols-1 gap-6 p-6 rounded-md shadow-sm " onSubmit={handleSubmit((data) => {
+                <section className=" container my-6   text-gray-950 p-6 rounded-md  max-w-sm mx-auto shadow-lg">
+                    <h2 className='text-center text-4xl font-semibold text-primary'> Log in here</h2>
+                    <form className=" grid grid-cols-1 gap-6  " onSubmit={handleSubmit((data) => {
                         handelLogIn(data);
                     })}>
 
