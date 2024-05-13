@@ -14,7 +14,7 @@ const BlogCard = ({ blog }) => {
                 <p>{shortDisc}</p>
 
                 <div className="card-actions justify-end">
-                    <Link to={`blog/${_id}`} className='btn btn-primary'>Details</Link>
+                    <Link to={`/blog/${_id}`} className='btn btn-primary'>Details</Link>
                     <button className='btn btn-primary'>Add to wish</button>
                 </div>
             </div>

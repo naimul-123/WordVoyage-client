@@ -4,6 +4,7 @@ import { AuthContext } from "../authprovider/Authprovider";
 
 const AddBlogs = () => {
     const { user } = useContext(AuthContext)
+    console.log(user)
     const handleSubmit = (e) => {
         e.preventDefault()
         const from = e.target;
@@ -15,9 +16,11 @@ const AddBlogs = () => {
         const createdAt = new Date();
         const authorName = user.displayName;
         const authorEmail = user.email;
+        const authorImg = user.photoURL
+
 
         axios.post('http://localhost:5000/addblogs', {
-            title, imgUrl, catagory, shortDisc, longDesc, createdAt, authorName, authorEmail
+            title, imgUrl, catagory, shortDisc, longDesc, createdAt, authorName, authorEmail, authorImg
         }).then(res => console.log(res.data)).catch(err => console.log(err.message))
         // fetch('http://localhost:5000/addblogs', {
         //     method: "POST",
