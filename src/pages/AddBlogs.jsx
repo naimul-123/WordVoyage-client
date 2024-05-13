@@ -22,16 +22,7 @@ const AddBlogs = () => {
         axios.post('http://localhost:5000/addblogs', {
             title, imgUrl, catagory, shortDisc, longDesc, createdAt, authorName, authorEmail, authorImg
         }).then(res => console.log(res.data)).catch(err => console.log(err.message))
-        // fetch('http://localhost:5000/addblogs', {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-type": "Application/json"
-        //     },
-        //     body: JSON.stringify(fromData)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data))
-        //     .catch(err => console.log(err.message))
+
 
     }
     return (
