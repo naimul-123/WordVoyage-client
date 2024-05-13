@@ -9,6 +9,7 @@ import FeaturedBlogs from "../pages/FeaturedBlogs";
 import Wishlist from "../pages/Wishlist";
 import { QueryClient } from '@tanstack/react-query'
 import PrivateRoute from "./PrivateRoute";
+import DetailsBlog from "../pages/DetailsBlog";
 export const queryClient = new QueryClient()
 
 const routes = createBrowserRouter([
@@ -27,6 +28,10 @@ const routes = createBrowserRouter([
             {
                 path: '/allBlogs',
                 element: <AllBlogs></AllBlogs>
+            },
+            {
+                path: '/blog/:id',
+                element: <PrivateRoute><DetailsBlog></DetailsBlog></PrivateRoute>
             },
             {
                 path: '/featuredBlogs',

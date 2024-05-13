@@ -31,9 +31,15 @@ const AllBlogs = () => {
             footer: 'Title',
         },
         {
-            header: 'Photo Url',
+            header: 'Photo',
             accessorKey: 'imgUrl',
-            footer: 'Photo Url',
+            footer: 'Photo',
+
+            // cell: ({ value }) => {
+            //     console.log(value)
+            //     return <img src={value} style={{ width: '50px', height: '50px' }} />
+            // },
+
         },
         {
             header: 'Catagory',
