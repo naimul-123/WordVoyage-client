@@ -32,12 +32,14 @@ const Navbar = () => {
                     {navLinks}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+            <div className="navbar-end group">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle group-hover:hidden avatar">
                     <div className="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+                        <p></p>
                     </div>
                 </div>
+                <p className='hidden group-hover:block'>{user?.displayName}</p>
             </div>
         </div>
     );

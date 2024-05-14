@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 import { FaEdit, FaReadme } from "react-icons/fa";
 import { FaHeart } from 'react-icons/fa6';
 import { AuthContext } from '../authprovider/Authprovider';
+import axios from 'axios';
 
 const BlogCard = ({ blog }) => {
     const { user } = useContext(AuthContext)
     const { _id, title, imgUrl, catagory, shortDisc, longDesc, createdAt, authorName, authorEmail } = blog
 
     const handleWish = () => {
-        const blogId = _id;
+        const email = user?.email
+        axios.put('http://localhost:5000/addtowish', {
+            _id, email
+        }).then(res => console.log(res.data)).catch(err => console.log(err.message))
+
 
 
     }

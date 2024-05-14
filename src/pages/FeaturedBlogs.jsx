@@ -30,37 +30,30 @@ const FeaturedBlogs = () => {
             accessorKey: 'title',
             footer: 'Title',
         },
-        {
-            header: 'Photo',
-            accessorKey: 'imgUrl',
-            footer: 'Photo',
 
-            // cell: ({ value }) => {
-            //     console.log(value)
-            //     return <img src={value} style={{ width: '50px', height: '50px' }} />
-            // },
+        {
+            header: 'Owoner',
+            accessorKey: 'authorName',
+            footer: 'Owoner',
+        },
+        {
+            header: 'Profile Picture',
+            accessorKey: 'authorImg',
+            cell: (table) => {
+                return (
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle group-hover:hidden avatar">
+                        <div className="w-10 rounded-full">
+                            <img alt={table.cell.row.original.authorName} src={table.cell.row.original.authorImg} />
+                            <p></p>
+                        </div>
+                    </div>
+                )
+            },
 
+
+            footer: 'Profile Picture',
         },
-        {
-            header: 'Catagory',
-            accessorKey: 'catagory',
-            footer: 'Catagory',
-        },
-        {
-            header: 'Short Description',
-            accessorKey: 'shortDisc',
-            footer: 'Short Description',
-        },
-        {
-            header: 'Long Description',
-            accessorKey: 'longDesc',
-            footer: 'Long Description',
-        },
-        {
-            header: 'Created At',
-            accessorKey: 'createdAt',
-            footer: 'Created At',
-        },
+
 
     ]
     useEffect(() => {
@@ -89,6 +82,7 @@ const FeaturedBlogs = () => {
 
 
     })
+    console.log(table)
     if (isPending) {
         return (
             <div className="flex flex-col gap-4 w-52">
