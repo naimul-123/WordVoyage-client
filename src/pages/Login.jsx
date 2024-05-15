@@ -1,13 +1,14 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { AuthContext } from '../authprovider/Authprovider';
+import axios from 'axios';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
     const [authErr, setAuthErr] = useState('')
-    const { signIn } = useContext(AuthContext);
+    const { signIn, googleSignIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const {
@@ -21,7 +22,32 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 if (result.user) {
-                    setTimeout(() => navigate(location?.state ? location.state : '/'))
+                    const logedUser = result.user
+                    axios.post('http://localhost:5000/jwt', logedUser, { withCredentials: true })
+                        .then(res => {
+                            if (res.data.success) {
+                                navigate(location?.state ? location.state : '/')
+                            }
+                        })
+                        .catch(err => console.log(err.message))
+
+                }
+            })
+            .catch(err => setAuthErr(err.message))
+    }
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                if (result.user) {
+                    const logedUser = result.user
+                    axios.post('http://localhost:5000/jwt', logedUser, { withCredentials: true })
+                        .then(res => {
+                            if (res.data.success) {
+                                navigate(location?.state ? location.state : '/')
+                            }
+                        })
+                        .catch(err => console.log(err.message))
+
                 }
             })
             .catch(err => setAuthErr(err.message))
@@ -33,8 +59,9 @@ const Login = () => {
                     <title>Log in</title>
                 </Helmet>
                 <ToastContainer autoClose={1000} />
-                <section className=" container my-6   text-gray-950 p-6 rounded-md  max-w-sm mx-auto shadow-lg">
+                <section className=" container my-6 space-y-2   text-gray-950 p-6 rounded-md  max-w-sm mx-auto shadow-lg">
                     <h2 className='text-center text-4xl font-semibold text-primary'> Log in here</h2>
+
                     <form className=" grid grid-cols-1 gap-6  " onSubmit={handleSubmit((data) => {
                         handelLogIn(data);
                     })}>
@@ -72,13 +99,18 @@ const Login = () => {
 
                             <button className="px-4 py-2 w-full bg-violet-600 text-white border rounded-md dark:border-gray-800">Login</button>
                         </div>
+
                         <div>
                             {authErr && (
                                 <p className='text-red-600'> {authErr}</p>
                             )}
-                            <p>Already have an account? Go to <Link to='/register' className="underline text-pink-500 font-bold">Register page</Link></p>
+                            <p>Don't have an account? Go to <Link to='/register' className="underline text-pink-500 font-bold">Register page</Link></p>
                         </div>
                     </form>
+                    <div className="flex flex-col  items-center ">
+                        <button className="btn  w-full btn-primary" onClick={handleGoogleLogin}>Log in with google</button>
+                    </div>
+
                 </section>
 
 

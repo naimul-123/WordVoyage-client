@@ -4,23 +4,30 @@ import { useQuery } from '@tanstack/react-query';
 import BlogCard from '../components/BlogCard';
 import axios from 'axios';
 import { set } from 'react-hook-form';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import useAuth from '../hooks/useAuth';
 
 const Wishlist = () => {
     const [wishedBlogs, setWishedBlogs] = useState([])
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth()
+    const axiosSecure = useAxiosSecure();
     const email = user?.email
-    const { isPending, isError, data: blogs, error } = useQuery({
-        queryKey: ['blogs'],
-        queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/mywishlist/${email}`)
-            return res.json();
-        }
+    const url = `/mywishlist/${email}`
+    // const { isPending, isError, data: blogs, error } = useQuery({
+    //     queryKey: ['blogs'],
+    //     queryFn: async () => {
+    //         const res = await fetch(`http://localhost:5000/mywishlist/${email}`)
+    //         return res.json();
+    //     }
 
-    })
-
+    // })
     useEffect(() => {
-        setWishedBlogs(blogs)
-    }, [blogs])
+        axiosSecure.get(url, { withCredentials: true })
+            .then(res => {
+                setWishedBlogs(res.data)
+            })
+    }, [url])
+
 
 
 
@@ -41,9 +48,7 @@ const Wishlist = () => {
 
             .catch(err => console.log(err.message))
     }
-    if (isPending) {
-        return
-    }
+
     // console.log(blogs)
     return (
         <div>

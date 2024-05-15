@@ -20,7 +20,12 @@ const Recent = () => {
 
     return (
         <div>
-            <div className='grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 gap-2'>
+            <div className="max-w-lg mx-auto text-center">
+                <h2 className="text-5xl font-bold">Here our recent blog</h2>
+                <p className="py-6">You explore here our recent blogs</p>
+
+            </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-col-3 lg:grid-cols-4 gap-2'>
                 {recentBlogs?.map((blog) => <BlogCard key={blog._id} blog={blog}></BlogCard>)}
             </div>
         </div>

@@ -62,7 +62,7 @@ const FeaturedBlogs = () => {
     }, [featuredBlogs])
 
     const data = useMemo(() => featuredBlogs, [featuredBlogs])
-    console.log(featuredBlogs)
+
     const table = useReactTable({
         data,
         columns,
@@ -82,7 +82,7 @@ const FeaturedBlogs = () => {
 
 
     })
-    console.log(table)
+
     if (isPending) {
         return (
             <div className="flex flex-col gap-4 w-52">
