@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [authErr, setAuthErr] = useState('')
@@ -23,10 +24,19 @@ const Login = () => {
             .then(result => {
                 if (result.user) {
                     const logedUser = result.user
-                    axios.post('http://localhost:5000/jwt', logedUser, { withCredentials: true })
+                    axios.post('https://assignment-11-server-snowy-nine.vercel.app/jwt', logedUser, { withCredentials: true })
                         .then(res => {
                             if (res.data.success) {
-                                navigate(location?.state ? location.state : '/')
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Successfully loged in!',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK',
+                                });
+
+                                setTimeout(() => {
+                                    navigate(location?.state ? location.state : '/')
+                                }, 2000)
                             }
                         })
                         .catch(err => console.log(err.message))
@@ -40,10 +50,21 @@ const Login = () => {
             .then(result => {
                 if (result.user) {
                     const logedUser = result.user
-                    axios.post('http://localhost:5000/jwt', logedUser, { withCredentials: true })
+                    axios.post('https://assignment-11-server-snowy-nine.vercel.app/jwt', logedUser, { withCredentials: true })
                         .then(res => {
                             if (res.data.success) {
-                                navigate(location?.state ? location.state : '/')
+
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'Successfully loged in with google!',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK',
+                                });
+
+                                setTimeout(() => {
+                                    navigate(location?.state ? location.state : '/')
+                                }, 2000)
+
                             }
                         })
                         .catch(err => console.log(err.message))

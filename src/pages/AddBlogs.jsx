@@ -19,7 +19,7 @@ const AddBlogs = () => {
         const authorImg = user.photoURL
 
 
-        axios.post('http://localhost:5000/addblogs', {
+        axios.post('https://assignment-11-server-snowy-nine.vercel.app/addblogs', {
             title, imgUrl, catagory, shortDisc, longDesc, createdAt, authorName, authorEmail, authorImg
         }).then(res => console.log(res.data)).catch(err => console.log(err.message))
 

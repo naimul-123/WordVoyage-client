@@ -25,7 +25,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">WordVoyage</a>
             </div>
             <div className="navbar-center hidden lg:flex gap-2">
                 <ul className="menu menu-horizontal px-1">
@@ -41,6 +41,7 @@ const Navbar = () => {
                 </div>
                 <p className='hidden group-hover:block'>{user?.displayName}</p>
             </div>
+
         </div>
     );
 };

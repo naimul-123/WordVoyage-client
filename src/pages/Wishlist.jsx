@@ -16,7 +16,7 @@ const Wishlist = () => {
     // const { isPending, isError, data: blogs, error } = useQuery({
     //     queryKey: ['blogs'],
     //     queryFn: async () => {
-    //         const res = await fetch(`http://localhost:5000/mywishlist/${email}`)
+    //         const res = await fetch(`https://assignment-11-server-snowy-nine.vercel.app/mywishlist/${email}`)
     //         return res.json();
     //     }
 
@@ -26,7 +26,7 @@ const Wishlist = () => {
             .then(res => {
                 setWishedBlogs(res.data)
             })
-    }, [url])
+    }, [url, axiosSecure])
 
 
 
@@ -34,7 +34,7 @@ const Wishlist = () => {
 
     const removeWished = (id) => {
         console.log(id)
-        axios.put('http://localhost:5000/removefromwish', {
+        axios.put('https://assignment-11-server-snowy-nine.vercel.app/removefromwish', {
             id, email
         })
             .then(res => {

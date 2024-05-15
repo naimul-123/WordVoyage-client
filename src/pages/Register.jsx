@@ -2,10 +2,9 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
-// import { Helmet } from 'react-helmet-async';
-import { ToastContainer, toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 import { AuthContext } from '../authprovider/Authprovider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [isShow, setIsShow] = useState(false);
@@ -17,10 +16,7 @@ const Register = () => {
     } = useForm();
     const navigate = useNavigate();
     const { createUser, logOut, updateUser } = useContext(AuthContext);
-    const notify = () =>
-        toast('Successfully Registered!', {
-            position: 'top-center',
-        });
+
 
 
     const handelRegister = (data) => {
@@ -33,10 +29,17 @@ const Register = () => {
                 updateUser(name, photoUrl)
                     .then(() => logOut())
                     .then(() => {
-                        notify();
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Successfully register!',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                        });
+
                         setTimeout(() => {
                             navigate('/login')
-                        }, 1000)
+                        }, 2000)
+
 
                     });
             })
@@ -48,9 +51,9 @@ const Register = () => {
             <Helmet>
                 <title>Register</title>
             </Helmet>
-            <ToastContainer autoClose={1000} />
+
             <section className="p-6 container mx-auto  text-gray-950">
-                <form className=" grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-md shadow-sm " onSubmit={handleSubmit((data) => {
+                <form className=" grid grid-cols-1 max-w-sm mx-auto gap-2 p-6 rounded-md shadow-sm " onSubmit={handleSubmit((data) => {
                     handelRegister(data);
                 })}>
 

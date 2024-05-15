@@ -8,7 +8,7 @@ const AllBlogs = () => {
     const { isPending, isError, data: blogs, error, refetch } = useQuery({
         queryKey: ['blogs', title, category],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/blogs?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`)
+            const res = await fetch(`https://assignment-11-server-snowy-nine.vercel.app/blogs?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`)
             return res.json();
         }
     })

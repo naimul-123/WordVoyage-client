@@ -13,7 +13,7 @@ const DetailsBlog = () => {
     const { isPending, isError, data: blog, error } = useQuery({
         queryKey: ['blog'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/blog/${id}`)
+            const res = await fetch(`https://assignment-11-server-snowy-nine.vercel.app/blog/${id}`)
             return res.json();
         }
 
@@ -26,7 +26,7 @@ const DetailsBlog = () => {
     const { data: comments, refetch } = useQuery({
         queryKey: ['comments', id],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/comments?blogId=${encodeURIComponent(id)}`)
+            const res = await fetch(`https://assignment-11-server-snowy-nine.vercel.app/comments?blogId=${encodeURIComponent(id)}`)
             return res.json();
         },
         enabled: enabled
@@ -50,7 +50,7 @@ const DetailsBlog = () => {
     const handleComment = (e) => {
         e.preventDefault();
         const comment = e.target.comment.value;
-        axios.post('http://localhost:5000/addComment', {
+        axios.post('https://assignment-11-server-snowy-nine.vercel.app/addComment', {
             comment, userName, userEmail, userPhoto, blogId
         }).then(res => {
             if (res.data.acknowledged) {

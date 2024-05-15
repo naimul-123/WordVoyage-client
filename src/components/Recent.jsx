@@ -8,7 +8,7 @@ const Recent = () => {
     const { isPending, isError, data: recentBlogs, error } = useQuery({
         queryKey: ['recentBlogs'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/recentBlogs')
+            const res = await fetch('https://assignment-11-server-snowy-nine.vercel.app/recentBlogs')
             return res.json();
         }
 

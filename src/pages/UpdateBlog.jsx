@@ -10,7 +10,7 @@ const UpdateBlog = () => {
     const { isPending, isError, data: blog, error } = useQuery({
         queryKey: ['blog'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/blog/${id}`)
+            const res = await fetch(`https://assignment-11-server-snowy-nine.vercel.app/blog/${id}`)
             return res.json();
         }
 
@@ -35,7 +35,7 @@ const UpdateBlog = () => {
         const authorImg = user.photoURL
 
 
-        axios.put('http://localhost:5000/updateblog', {
+        axios.put('https://assignment-11-server-snowy-nine.vercel.app/updateblog', {
             _id, title, imgUrl, catagory, shortDisc, longDesc
         }).then(res => console.log(res.data)).catch(err => console.log(err.message))
 

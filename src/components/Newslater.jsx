@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 const Newslater = () => {
@@ -10,9 +11,29 @@ const Newslater = () => {
         console.log(email)
 
 
-        axios.put('http://localhost:5000/addtonewsletter', {
+        axios.put('https://assignment-11-server-snowy-nine.vercel.app/addtonewsletter', {
             email
-        }).then(res => console.log(res.data)).catch(err => console.log(err.message))
+        }).then(res => {
+            console.log(res.data)
+            if (res.data.modifiedCount === 1) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Thank you for subscribing to our newsletter',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                });
+                e.target.reset();
+            }
+            if (res.data.modifiedCount === 1) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Thank you for subscribing to our newsletter',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                });
+                e.target.reset();
+            }
+        }).catch(err => console.log(err.message))
 
 
     }

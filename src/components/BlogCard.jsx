@@ -11,7 +11,7 @@ const BlogCard = ({ blog, isWished, removeWished }) => {
 
     const handleWish = () => {
         const email = user?.email
-        axios.put('http://localhost:5000/addtowish', {
+        axios.put('https://assignment-11-server-snowy-nine.vercel.app/addtowish', {
             _id, email
         }).then(res => console.log(res.data)).catch(err => console.log(err.message))
 
