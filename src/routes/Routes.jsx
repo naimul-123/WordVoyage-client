@@ -11,12 +11,14 @@ import { QueryClient } from '@tanstack/react-query'
 import PrivateRoute from "./PrivateRoute";
 import DetailsBlog from "../pages/DetailsBlog";
 import UpdateBlog from "../pages/UpdateBlog";
+import ErrorPage from "../pages/ErrorPage";
 export const queryClient = new QueryClient()
 
 const routes = createBrowserRouter([
     {
         path: "/",
         element: <App></App>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
